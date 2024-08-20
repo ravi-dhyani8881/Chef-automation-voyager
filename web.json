@@ -1,0 +1,6 @@
+
+{
+ "run_list": ["recipe[voyager::default]"] 
+/*  "run_list": ["recipe[graphql::default]", "recipe[graphql::solr]"]*/
+
+}

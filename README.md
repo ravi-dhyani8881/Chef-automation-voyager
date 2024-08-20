@@ -1,2 +1,2 @@
-# Chef-automation-voyager
-Chef-automation-voyager
+# Chef-automation-graphiql
+Chef-automation-graphiql
