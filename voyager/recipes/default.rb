@@ -32,7 +32,7 @@ user 'ravi.dhyani' do
   action :create
 end
 
-directory "/gql-server"do
+directory installDirectory + projectName + "/gql-server"do
   owner 'ravi.dhyani'
  # group 'group_name'
   mode '0755'
@@ -40,7 +40,7 @@ directory "/gql-server"do
   action :create
 end
 
-directory "/voyager"do
+directory installDirectory + projectName + "/voyager"do
   owner 'ravi.dhyani'
  # group 'group_name'
   mode '0755'
@@ -52,7 +52,7 @@ end
 # recipe.rb
 
 # Assuming @name is defined elsewhere in the recipe or attributes
-template "/gql-server/index.js" do
+template installDirectory + projectName + "/gql-server/index.js" do
   source 'index.js.erb'
   variables(
     projectName: projectName
@@ -63,7 +63,7 @@ template "/gql-server/index.js" do
   action :create
 end
 
-template "/gql-server/schema.js" do
+template installDirectory + projectName + "/gql-server/schema.js" do
   source 'schema.js.erb'
   variables(
     projectName: projectName
@@ -75,7 +75,7 @@ template "/gql-server/schema.js" do
 end
 
 
-template "/voyager/index.html" do
+template installDirectory + projectName + "/voyager/index.html" do
   source 'index.html.erb'
   variables(
     projectName: projectName
@@ -86,7 +86,7 @@ template "/voyager/index.html" do
   action :create
 end
 
-template "/voyager/voyager.js" do
+template installDirectory + projectName + "/voyager/voyager.js" do
   source 'voyager.js.erb'
   variables(
     projectName: projectName
@@ -97,7 +97,7 @@ template "/voyager/voyager.js" do
   action :create
 end
 
-template "/package.json" do
+template installDirectory + projectName + "/package.json" do
   source 'package.json.erb'
   variables(
     projectName: projectName
@@ -108,7 +108,7 @@ template "/package.json" do
   action :create
 end
 
-template "/package-lock.json" do
+template installDirectory + projectName + "/package-lock.json" do
   source 'package-lock.json.erb'
   variables(
     projectName: projectName
