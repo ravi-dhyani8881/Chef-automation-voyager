@@ -14,7 +14,8 @@ export const typeDefs = `#graphql
         count: Int
     }
 
-<% @schema.each do |table_name, table_info| %>
+<% @graph.each do |table| %>
+    <% table.each do |table_name, table_info| %>
     type Query {
         find<%= table_name.capitalize %>ByQuery(query: String, start: String, rows: String, filterField: String, filterQuery: String, sort: String, advanceField: String, advanceQuery: String, advance: String, field: String ): <%= table_name %>Response
     }
@@ -34,5 +35,6 @@ export const typeDefs = `#graphql
         <% end %>
     }
 
+    <% end %>
 <% end %>
 `;
