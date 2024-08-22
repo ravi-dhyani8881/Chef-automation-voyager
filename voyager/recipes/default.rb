@@ -32,7 +32,7 @@ user 'ravi.dhyani' do
   action :create
 end
 
-directory installDirectory + projectName + "/gql-server"do
+directory installDirectory + projectName + "/gql-server/" do
   owner 'ravi.dhyani'
  # group 'group_name'
   mode '0755'
@@ -40,7 +40,7 @@ directory installDirectory + projectName + "/gql-server"do
   action :create
 end
 
-directory installDirectory + projectName + "/voyager"do
+directory installDirectory + projectName + "/voyager/" do
   owner 'ravi.dhyani'
  # group 'group_name'
   mode '0755'
