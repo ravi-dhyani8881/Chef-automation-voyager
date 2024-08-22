@@ -1,35 +1,38 @@
-
-<%= @projectName %>
-
 export const typeDefs = `#graphql
     "used for Voyager entry point"
     type Root {
         query: Query
-        mutation: Mutation
     }
 
-    type Todo {
-        id: ID!
-        content: String!
-        completed: Boolean!
+    type Advanced {
+        fieldName: String
+        values: [Values]
+    } 
+
+    type Values {
+        name: String
+        count: Int
     }
 
+<% @schema.each do |table_name, table_info| %>
     type Query {
-        todos: [Todo!]!
+        find<%= table_name.capitalize %>ByQuery(query: String, start: String, rows: String, filterField: String, filterQuery: String, sort: String, advanceField: String, advanceQuery: String, advance: String, field: String ): <%= table_name %>Response
     }
 
-    input AddTodoMutationInput {
-        content: String!
+    type <%= table_name %>Response {
+        start: String
+        row: String
+        statusCode: Int
+        totalRecords: Int
+        advanced: [Advanced]
+        records: [Records<%= table_name %>]
+    }
+    
+    type Records<%= table_name %> {
+        <% table_info['fields'].each do |field| %>
+            <%= field['name'] %>: String
+        <% end %>
     }
 
-    input UpdateTodoMutationInput {
-        id: ID!
-        content: String
-        completed: Boolean
-    }
-
-    type Mutation {
-        addTodo(input: AddTodoMutationInput! ): Todo!
-        updateTodo(input: UpdateTodoMutationInput!): Todo!
-    }
+<% end %>
 `;
