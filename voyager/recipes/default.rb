@@ -66,7 +66,7 @@ end
 template installDirectory + projectName + "/gql-server/schema.js" do
   source 'schema.js.erb'
   variables(
-    projectName: graph
+    graph: graph
   )
   owner 'ravi.dhyani'
   #group 'ravi.dhyani'
