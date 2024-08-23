@@ -17,7 +17,7 @@ export const typeDefs = `#graphql
 <% @graph.each do |table| %>
     <% table.each do |table_name, table_info| %>
     type Query {
-        find<%= table_name.capitalize %>ByQuery(query: String, start: String, rows: String, filterField: String, filterQuery: String, sort: String, advanceField: String, advanceQuery: String, advance: String, field: String ): <%= table_name %>Response
+        find<%= table_name %>ByQuery(query: String, start: String, rows: String, filterField: String, filterQuery: String, sort: String, advanceField: String, advanceQuery: String, advance: String, field: String ): <%= table_name %>Response
     }
 
     type <%= table_name %>Response {
@@ -29,19 +29,19 @@ export const typeDefs = `#graphql
         records: [Records<%= table_name %>]
     }
     
-   type Records<%= table_name.capitalize %> {
+   type Records<%= table_name %> {
         <% table_info['fields'].each do |field| %>
             <%= field['name'] %>: <%= case field['type'].downcase
                              when 'string' then 'String'
                              when 'date' then 'DateTime'
                              when 'int' then 'Int'
-                             else field['type'].capitalize
+                             else field['type']
                            end %>
         <% end %>
 
         <% table_info['relations'].each do |relation| %>
             <% relation['table'].each do |related_table| %>
-            find<%= related_table['name'].capitalize %>ByQuery(query: String, start: String, rows: String, filterField: String, filterQuery: String, sort: String, advanceField: String, advanceQuery: String, advance: String, field: String ): <%= related_table['name'] %>Response
+            find<%= related_table['name'] %>ByQuery(query: String, start: String, rows: String, filterField: String, filterQuery: String, sort: String, advanceField: String, advanceQuery: String, advance: String, field: String ): <%= related_table['name'] %>Response
             <% end %>
         <% end %>
     }
