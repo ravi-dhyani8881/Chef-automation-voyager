@@ -29,9 +29,20 @@ export const typeDefs = `#graphql
         records: [Records<%= table_name %>]
     }
     
-    type Records<%= table_name %> {
+   type Records<%= table_name.capitalize %> {
         <% table_info['fields'].each do |field| %>
-            <%= field['name'] %>: String
+            <%= field['name'] %>: <%= case field['type'].downcase
+                             when 'string' then 'String'
+                             when 'date' then 'DateTime'
+                             when 'int' then 'Int'
+                             else field['type'].capitalize
+                           end %>
+        <% end %>
+
+        <% table_info['relations'].each do |relation| %>
+            <% relation['table'].each do |related_table| %>
+            find<%= related_table['name'].capitalize %>ByQuery(query: String, start: String, rows: String, filterField: String, filterQuery: String, sort: String, advanceField: String, advanceQuery: String, advance: String, field: String ): <%= related_table['name'] %>Response
+            <% end %>
         <% end %>
     }
 
